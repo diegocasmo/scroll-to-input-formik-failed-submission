@@ -13,11 +13,13 @@ export const ScrollToFieldError = ({
     const fieldErrorNames = getFieldErrorNames(errors)
     if (fieldErrorNames.length <= 0) return
 
-    const elements = document.getElementsByName(fieldErrorNames[0])
-    if (elements.length <= 0) return
+    const element = document.querySelector(
+      `input[name='${fieldErrorNames[0]}']`
+    )
+    if (!element) return
 
     // Scroll to first known error into view
-    elements[0].scrollIntoView(scrollBehavior)
+    element.scrollIntoView(scrollBehavior)
 
     // Formik doesn't (yet) provide a callback for a client-failed submission,
     // thus why this is implemented through a hook that listens to changes on
